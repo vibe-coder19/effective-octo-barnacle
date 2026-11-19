@@ -5,8 +5,9 @@ A system prompt plus a short end-of-chat reminder for GLM-5.3, tuned for:
 - staying in character (voice, knowledge limits, the character's own agenda)
 - vivid scenes and detailed physical appearance
 - realism without positivity bias
-- short user messages: one beat per reply, at most one question
+- short user messages: compact replies, one development at a time, at most one question, and endings that stop naturally instead of fishing for a response
 - NPCs who speak and act when the scene needs them
+- one-on-one and group chats alike (the prompts use no macros)
 
 ## Files
 
@@ -40,6 +41,7 @@ What the preset sets:
 | Other samplers and penalties | neutral | The Z.AI source doesn't send frequency or presence penalties anyway |
 | Max Response Length | 4096 | Thinking tokens count toward this on most providers. Set it too low and replies come back cut off or empty. Reply length is controlled by the prompt, not by this number. |
 | Request model reasoning | on | On the Z.AI source this switches GLM's thinking on. The prompt's "Before Each Reply" checklist runs in that thinking. |
+| Character Names Behavior | Default | In group chats this labels each message with its speaker, so the model can tell the characters apart |
 | Forbid overrides | on (Main Prompt and Post-History Reminder) | A character card's own system prompt can't silently replace yours |
 
 The preset doesn't set context size. For roleplay, 32k to 64k tokens is a sensible range; longer chats get slower and more expensive, and the instructions carry less weight.
@@ -48,9 +50,18 @@ The preset doesn't set context size. For roleplay, 32k to 64k tokens is a sensib
 
 In Advanced Formatting, under System Prompt, import `GLM-5.3 Roleplay (Text Completion system prompt).json` and enable it. It fills both the System Prompt and its Post-History Instructions. You'll also need an instruct template that matches GLM's chat format. Chat Completion skips that step, which is why it's the recommended mode.
 
+## Group chats
+
+The prompts contain no macros, so the same text works for whichever character is speaking. In a group chat, SillyTavern tells the model whose turn it is in two ways:
+
+- The **group nudge** ("Write the next reply only as ...", under Utility Prompts) goes at the end of the prompt. Leave it at its default.
+- **Character Names Behavior: Default** labels each group message with its speaker. The preset sets this. Some GLM presets recommend "None", which removes those labels.
+
+Because the prompt no longer names your character, make sure your persona description includes your character's name.
+
 ## Tuning
 
-- **Reply length:** change `150-300 words` in both prompts (Main Prompt and Post-History Reminder).
+- **Reply length:** there's no word count. The prompt asks for short paragraphs and one development per reply. If replies still run long, add a line under Keep Replies Easy to Answer, such as "Most replies are two or three short paragraphs."
 - **More appearance detail:** under Vivid Physical Description, change "at least one concrete detail" to "two or three".
 - **Characters too harsh:** if characters turn cold for no reason, the card and the realism rules are probably stacking. Delete a bullet or two from Realism Over Positivity.
 - **A habit keeps coming back** (echoing your message, a pet phrase): add the exact phrase to the stock-phrase list under Style.
@@ -66,4 +77,4 @@ In Advanced Formatting, under System Prompt, import `GLM-5.3 Roleplay (Text Comp
 
 ## Why this format
 
-Z.ai doesn't publish a recommended prompt format for roleplay. GLM-5.3's post-training was mostly agentic coding work, where system prompts are written as Markdown headers with short bullet lists. So the prompt opens with a short prose statement of the role, followed by headed sections of one-idea bullets that the model's thinking can check one at a time. Rules are stated positively. Concrete "don't" examples are used only for habits GLM models are known for in roleplay: echoing your message, stock phrases, characters reading your mind, and positivity or moralizing. The reminder after the chat history repeats only the rules that drift over long chats: length, one question, an appearance detail, and never writing for you.
+Z.ai doesn't publish a recommended prompt format for roleplay. GLM-5.3's post-training was mostly agentic coding work, where system prompts are written as Markdown headers with short bullet lists. So the prompt opens with a short prose statement of the role, followed by headed sections of one-idea bullets that the model's thinking can check one at a time. Rules are stated positively. Concrete "don't" examples are used only for habits GLM models are known for in roleplay: echoing your message, stock phrases, characters reading your mind, and positivity or moralizing. The reminder after the chat history repeats only the rules that drift over long chats: one development per reply, one question, natural endings, an appearance detail, and never writing for you.
