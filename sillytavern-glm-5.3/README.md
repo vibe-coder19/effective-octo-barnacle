@@ -17,6 +17,15 @@ A system prompt plus a short end-of-chat reminder for GLM-5.3, tuned for:
 | `post-history-instructions.txt` | The reminder that goes after the chat history (Post-History Instructions). |
 | `GLM-5.3 Roleplay (Text Completion system prompt).json` | The same two prompts as a System Prompt preset, for Text Completion mode. |
 
+## GLM-5.3 or GLM-5.2?
+
+Use GLM-5.3.
+
+- GLM-5.3 is GLM-5.2 with more training added on top, and Z.ai charges the same for both ($1.40 per million input tokens, $4.40 per million output tokens; [VentureBeat](https://venturebeat.com/ai/glm-5-3-hits-the-api-at-1-4-4-4-per-million-tokens)).
+- Its creative writing improved: on [Lech Mazur's short-story benchmark](https://x.com/LechMazur/status/2090840412340543988) it scored 3.5, up from GLM-5.2's 0.8, and it tends to write a second character who pushes back.
+- Roleplay users report that 5.3 keeps characters more consistent, follows instructions better and repeats your message back less. GLM-5.2 tends to jump to the obvious or overly romantic outcome, which is the positivity bias this prompt is trying to remove.
+- Use 5.2 only if your provider doesn't offer 5.3 yet, or if you compare them on a card and prefer its voice. Everything here works on 5.2 unchanged; only the model in API Connections changes.
+
 ## Setup (Chat Completion)
 
 1. **API Connections:** set API to Chat Completion. Pick **Z.AI** as the source with model `glm-5.3`, or OpenRouter, NanoGPT or Custom (OpenAI-compatible) for another host or a local server. In Chat Completion mode the backend applies GLM's own chat template, so the prompt reaches the model in the format it was trained on.
@@ -46,6 +55,8 @@ In Advanced Formatting, under System Prompt, import `GLM-5.3 Roleplay (Text Comp
 - **Characters too harsh:** if characters turn cold for no reason, the card and the realism rules are probably stacking. Delete a bullet or two from Realism Over Positivity.
 - **A habit keeps coming back** (echoing your message, a pet phrase): add the exact phrase to the stock-phrase list under Style.
 - **You want a card's own system prompt:** untick "Forbid overrides" on the Main Prompt.
+- **Replies feel predictable:** try a few swipes with "Request model reasoning" off. One reviewer found GLM-5.3 a bit more creative without thinking. The post-history reminder still applies, but the "Before Each Reply" checklist doesn't run, and 5.3 is reported to handle subtle social scenes worse with less reasoning. Keep it on for those scenes.
+- **Comparing 5.2 and 5.3 yourself:** save two Connection Profiles, one for each model. Open the same chat and swipe the last reply with each.
 
 ## Troubleshooting
 
