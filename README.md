@@ -46,6 +46,18 @@ SillyTavern → **Extensions** (stacked blocks icon) → **Install extension** �
 Until this is merged into the default branch, enter `claude/nifty-archimedes-rg0jbe` as the
 branch in the install dialog.
 
+While the repository is private, the installer only works if git on that machine is signed in to
+GitHub. Otherwise clone it yourself into your user's extensions folder (from the SillyTavern
+folder; git asks for your GitHub login):
+
+```bash
+git clone -b claude/nifty-archimedes-rg0jbe https://github.com/vibe-coder19/effective-octo-barnacle data/default-user/extensions/effective-octo-barnacle
+```
+
+or download the branch as a ZIP from GitHub and extract it so that
+`data/default-user/extensions/effective-octo-barnacle/manifest.json` exists. Then reload
+SillyTavern in the browser.
+
 ### 2. The server plugin
 
 1. Copy the `server-plugin/llamacpp-allstop` folder into SillyTavern's `plugins` folder.
@@ -73,7 +85,10 @@ branch in the install dialog.
    `[llamacpp-allstop] v1.0.0 loaded: tracking outgoing generation requests`, and the extension's
    settings panel should say **Server plugin: installed**.
 
-The plugin does not update with the extension: copy it again after an update that changes it.
+To update: use the extension's update button in SillyTavern's Extensions panel (or `git pull` in
+its folder). It does not auto-update, so a private repo or a ZIP install doesn't greet you with a
+failed-update toast on every load. The plugin does not update with the extension: copy it again
+after an update that changes it.
 
 ## Use
 
